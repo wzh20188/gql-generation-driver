@@ -6,7 +6,7 @@ DB_USER = "admin"
 DB_PASSWORD = "73@TuGraph"
 
 # 默认路径配置
-DEFAULT_DBGPT_ROOT = '/home/ubuntu/dbgpt-hub-gql'
+DEFAULT_DBGPT_ROOT = 'dbgpt-hub-gql'
 TEMP_DIR = 'temp_eval_results'
 
 # 评测层级定义
