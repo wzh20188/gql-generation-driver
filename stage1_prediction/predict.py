@@ -26,4 +26,4 @@ if __name__ == "__main__":
 
     json.dump(results, open(output_path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
 
-    print("\n🎉 预测完成！结果保存到：", output_path)
+    print("\n 预测完成！结果保存到：", output_path)
