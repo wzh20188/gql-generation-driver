@@ -1,1 +1,0 @@
-python main.py --input /path/to/predicted.json --dbgpt_root /path/to/dbgpt-hub-gql

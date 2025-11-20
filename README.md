@@ -39,7 +39,8 @@ pip install -r requirements.txt
 执行：
 
 ```bash
-python stage1_prediction/predict.py
+cd stage1_prediction
+python predict.py
 ```
 
 输入数据位于：
@@ -61,7 +62,8 @@ stage1_prediction/outputs/predicted.json
 运行：
 
 ```bash
-python stage2_evaluation/main.py
+cd stage2_evaluation
+python main.py --input ../stage1_prediction/outputs/predicted.json
 ```
 
 配置文件：
