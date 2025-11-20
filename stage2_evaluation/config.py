@@ -6,8 +6,9 @@ DB_USER = "admin"
 DB_PASSWORD = "73@TuGraph"
 
 # 默认路径配置
-DEFAULT_DBGPT_ROOT = 'dbgpt-hub-gql'
-TEMP_DIR = 'temp_eval_results'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_DBGPT_ROOT = os.path.join(BASE_DIR, "dbgpt-hub-gql", "src", "dbgpt_hub_gql")
+TEMP_DIR = os.path.join(BASE_DIR, "temp_eval_results")
 
 # 评测层级定义
 LEVEL_FIELDS = [
