@@ -1,3 +1,0 @@
-[submodule "stage2_evaluation/dbgpt-hub-gql"]
-	path = stage2_evaluation/dbgpt-hub-gql
-	url = https://github.com/eosphoros-ai/DB-GPT-Hub

@@ -1,0 +1,184 @@
+[
+  {
+    "instance_id": 0,
+    "gold_query": "MATCH (c:COUNTRY)-[s:Speaks]->(l:LANGUAGE) WHERE s.percentage > 50 RETURN c, l",
+    "pred_query": "MATCH (c:COUNTRY)<-[:Speaks]-(l:LANGUAGE) WITH c, l, AVG(s.percentage) AS avg_percentage WHERE avg_percentage > 50.0 RETURN DISTINCT c.name AS country, l.name AS dominant_language, avg_percentage ORDER BY c.name, avg_percentage DESC",
+    "cleaned_pred": "MATCH (c:COUNTRY)<-[:Speaks]-(l:LANGUAGE) WITH c, l, AVG(s.percentage) AS avg_percentage WHERE avg_percentage > 50.0 RETURN DISTINCT c.name AS country, l.name AS dominant_language, avg_percentage ORDER BY c.name, avg_percentage DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 1,
+    "gold_query": "MATCH (c:CITY)-[h:HasEthnicGroup]->(e:ETHNICITY) RETURN count(e) AS ethnic_group_count, avg(h.percentage) AS average_percentage",
+    "pred_query": "MATCH (c:CITY)-[r:HasEthnicGroup]->(e:ETHNICITY) RETURN c.name AS city, COUNT(e) AS ethnic_group_count, AVG(r.percentage) AS mean_population_share ORDER BY ethnic_group_count DESC, mean_population_share DESC",
+    "cleaned_pred": "MATCH (c:CITY)-[r:HasEthnicGroup]->(e:ETHNICITY) RETURN c.name AS city, COUNT(e) AS ethnic_group_count, AVG(r.percentage) AS mean_population_share ORDER BY ethnic_group_count DESC, mean_population_share DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 2,
+    "gold_query": "MATCH (l:LAKE) WHERE l.max_depth > 100 AND l.area > 500 RETURN l ORDER BY l.max_depth DESC",
+    "pred_query": "MATCH (l:LAKE) WHERE l.area IS NOT NULL AND l.max_depth IS NOT NULL WITH l, l.area * l.max_depth AS volume_estimate ORDER BY volume_estimate DESC RETURN l.name AS lake_name, l.area AS surface_area, l.max_depth AS maximum_depth, volume_estimate LIMIT 10",
+    "cleaned_pred": "MATCH (l:LAKE) WHERE l.area IS NOT NULL AND l.max_depth IS NOT NULL WITH l, l.area * l.max_depth AS volume_estimate ORDER BY volume_estimate DESC RETURN l.name AS lake_name, l.area AS surface_area, l.max_depth AS maximum_depth, volume_estimate LIMIT 10",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 3,
+    "gold_query": "MATCH (r1:RIVER)-[:FlowsInto]->(s:SEA)<-[:FlowsInto]-(r2:RIVER) WHERE r1.river_id <> r2.river_id RETURN r1.name AS river1_name, r2.name AS river2_name, s.name AS sea_name",
+    "pred_query": "MATCH (r1:RIVER)-[:FlowsInto]->(s:SEA)<-[:FlowsInto]-(r2:RIVER) WHERE r1.river_id < r2.river_id RETURN DISTINCT r1.name AS river1, r2.name AS river2, s.name AS common_sea ORDER BY common_sea, river1, river2",
+    "cleaned_pred": "MATCH (r1:RIVER)-[:FlowsInto]->(s:SEA)<-[:FlowsInto]-(r2:RIVER) WHERE r1.river_id < r2.river_id RETURN DISTINCT r1.name AS river1, r2.name AS river2, s.name AS common_sea ORDER BY common_sea, river1, river2",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 4,
+    "gold_query": "MATCH (c:CITY)-[:LocatedIn]->(co:COUNTRY)-[:HasGovernment]->(g:GOVERNMENT_TYPE) WHERE c.population >= 1000000 AND c.population <= 5000000 AND g.name = 'Republic' RETURN c ORDER BY c.population ASC",
+    "pred_query": "MATCH (c:CITY)-[:LocatedIn]->(co:COUNTRY)-[:HasGovernment]->(g:GOVERNMENT_TYPE) WHERE g.name = 'republic' RETURN DISTINCT c.name, c.population ORDER BY c.population DESC",
+    "cleaned_pred": "MATCH (c:CITY)-[:LocatedIn]->(co:COUNTRY)-[:HasGovernment]->(g:GOVERNMENT_TYPE) WHERE g.name = 'republic' RETURN DISTINCT c.name, c.population ORDER BY c.population DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 5,
+    "gold_query": "MATCH (p1:PROVINCE)-[:Contains]->(b1:BOUNDARY), (p2:PROVINCE)-[:Contains]->(b2:BOUNDARY) WHERE b1.type = b2.type AND p1.province_id <> p2.province_id RETURN DISTINCT p1.name, p2.name",
+    "pred_query": "MATCH (p1:PROVINCE)-[:HasBoundaryWith]->(b:BOUNDARY)<-[:HasBoundaryWith]-(p2:PROVINCE) WHERE p1.province_id < p2.province_id RETURN DISTINCT b.type AS boundary_type, p1.name AS province1, p2.name AS province2 ORDER BY boundary_type, province1, province2",
+    "cleaned_pred": "MATCH (p1:PROVINCE)-[:HasBoundaryWith]->(b:BOUNDARY)<-[:HasBoundaryWith]-(p2:PROVINCE) WHERE p1.province_id < p2.province_id RETURN DISTINCT b.type AS boundary_type, p1.name AS province1, p2.name AS province2 ORDER BY boundary_type, province1, province2",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 6,
+    "gold_query": "MATCH (r:RIVER)-[:FlowsInto]->(s:SEA) WHERE r.length > 1000 RETURN r ORDER BY r.length DESC",
+    "pred_query": "MATCH (r:RIVER)-[:FLOWS_INTO*1..3]->(s:SEA) WHERE r.length > 1000 RETURN r.name AS river_name, r.length AS length, s.name AS sea_name ORDER BY r.length DESC",
+    "cleaned_pred": "MATCH (r:RIVER)-[:FLOWS_INTO*1..3]->(s:SEA) WHERE r.length > 1000 RETURN r.name AS river_name, r.length AS length, s.name AS sea_name ORDER BY r.length DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 7,
+    "gold_query": "MATCH (c:CITY)-[:LocatedIn]->(country:COUNTRY) RETURN country.name AS country_name, count(c) AS city_count, sum(c.population) AS total_population ORDER BY country_name",
+    "pred_query": "MATCH (c: CITY)-[:LocatedIn]->(co: COUNTRY) RETURN co.name AS country,         COUNT(c) AS city_count,         SUM(c.population) AS total_urban_population,         COLLECT({city: c.name, population: c.population}) AS cities ORDER BY total_urban_population DESC",
+    "cleaned_pred": "MATCH (c: CITY)-[:LocatedIn]->(co: COUNTRY) RETURN co.name AS country,         COUNT(c) AS city_count,         SUM(c.population) AS total_urban_population,         COLLECT({city: c.name, population: c.population}) AS cities ORDER BY total_urban_population DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 8,
+    "gold_query": "MATCH (r:RIVER)-[:FlowsInto]->(o:OCEAN) WHERE o.name = 'Pacific Ocean' RETURN r.name",
+    "pred_query": "MATCH (o:OCEAN {name: \"Pacific Ocean\"})<-[:DrainsTo*1..]-(r:RIVER) RETURN DISTINCT r.name AS river_name ORDER BY river_name",
+    "cleaned_pred": "MATCH (o:OCEAN {name: \"Pacific Ocean\"})<-[:DrainsTo*1..]-(r:RIVER) RETURN DISTINCT r.name AS river_name ORDER BY river_name",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 9,
+    "gold_query": "MATCH (p:PROVINCE) WHERE p.population < 1000000 AND p.area > 10000 RETURN p.name ORDER BY p.area ASC",
+    "pred_query": "MATCH (p:PROVINCE) WHERE p.population IS NOT NULL AND p.area IS NOT NULL WITH p, toFloat(p.population) / p.area AS density ORDER BY density ASC RETURN p.name AS province_name, p.population, p.area, density LIMIT 10",
+    "cleaned_pred": "MATCH (p:PROVINCE) WHERE p.population IS NOT NULL AND p.area IS NOT NULL WITH p, toFloat(p.population) / p.area AS density ORDER BY density ASC RETURN p.name AS province_name, p.population, p.area, density LIMIT 10",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 10,
+    "gold_query": "MATCH (c:COUNTRY)-[:HasForest]->(f:FOREST) RETURN c.name AS country, AVG(f.area) AS average_forest_area, SUM(f.area) AS total_forest_area ORDER BY total_forest_area DESC LIMIT 1",
+    "pred_query": "MATCH (c:COUNTRY)-[:HasForest]->(f:FOREST) WITH c, SUM(f.area) AS total_forest_area ORDER BY total_forest_area DESC LIMIT 1 MATCH (c)-[:HasForest]->(forest:FOREST) RETURN c.name AS country_name, forest.name AS forest_name, forest.area AS forest_area, total_forest_area ORDER BY forest.area DESC",
+    "cleaned_pred": "MATCH (c:COUNTRY)-[:HasForest]->(f:FOREST) WITH c, SUM(f.area) AS total_forest_area ORDER BY total_forest_area DESC LIMIT 1 MATCH (c)-[:HasForest]->(forest:FOREST) RETURN c.name AS country_name, forest.name AS forest_name, forest.area AS forest_area, total_forest_area ORDER BY forest.area DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 11,
+    "gold_query": "MATCH (c:CITY) WHERE c.area > 500 AND c.latitude >= 40 AND c.latitude <= 50 RETURN c ORDER BY c.longitude ASC",
+    "pred_query": "MATCH (c:CITY) WHERE c.latitude IS NOT NULL   AND c.population IS NOT NULL   AND abs(c.latitude) >= 30   AND abs(c.latitude) <= 60   AND c.population >= 500000 RETURN DISTINCT c.name AS city_name,        c.latitude AS latitude,        c.longitude AS longitude,        c.population AS population ORDER BY c.longitude",
+    "cleaned_pred": "MATCH (c:CITY) WHERE c.latitude IS NOT NULL   AND c.population IS NOT NULL   AND abs(c.latitude) >= 30   AND abs(c.latitude) <= 60   AND c.population >= 500000 RETURN DISTINCT c.name AS city_name,        c.latitude AS latitude,        c.longitude AS longitude,        c.population AS population ORDER BY c.longitude",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 12,
+    "gold_query": "MATCH (r:RIVER)-[:FlowsInto]->(o:OCEAN) WITH o, count(r) AS tributary_count RETURN o.name AS ocean_name, tributary_count ORDER BY tributary_count DESC LIMIT 1",
+    "pred_query": "MATCH (r:RIVER)-[:DrainsTo]->(o:OCEAN) RETURN o.name AS ocean_name, COUNT(r) AS river_count ORDER BY river_count DESC",
+    "cleaned_pred": "MATCH (r:RIVER)-[:DrainsTo]->(o:OCEAN) RETURN o.name AS ocean_name, COUNT(r) AS river_count ORDER BY river_count DESC",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  },
+  {
+    "instance_id": 13,
+    "gold_query": "MATCH (m:MOUNTAIN)<-[:HasMountain]-(p:PROVINCE)-[:PartOf]->(r:REGION)-[:PartOf]->(c:CONTINENT) WHERE c.area > 10000000 RETURN m",
+    "pred_query": "MATCH (m:MOUNTAIN)-[:LocatedIn]->(:PROVINCE)-[:LocatedIn]->(c:COUNTRY)-[:PartOf]->(cont:CONTINENT) WHERE cont.area > 10000000 RETURN DISTINCT m.name AS mountain_name, c.name AS country_name, cont.name AS continent_name, cont.area AS continent_area ORDER BY cont.area DESC, m.name",
+    "cleaned_pred": "MATCH (m:MOUNTAIN)-[:LocatedIn]->(:PROVINCE)-[:LocatedIn]->(c:COUNTRY)-[:PartOf]->(cont:CONTINENT) WHERE cont.area > 10000000 RETURN DISTINCT m.name AS mountain_name, c.name AS country_name, cont.name AS continent_name, cont.area AS continent_area ORDER BY cont.area DESC, m.name",
+    "metrics": {
+      "grammar": 1.0,
+      "similarity": 0.7687075467589801,
+      "google_bleu": 0.42358892438764645
+    },
+    "gold_result": null,
+    "pred_result": null
+  }
+]

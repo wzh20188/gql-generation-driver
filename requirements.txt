@@ -1,0 +1,17 @@
+# 数据库连接 
+neo4j>=5.0.0
+
+# 大模型调用 
+openai>=1.0.0
+
+# 进度条显示
+tqdm
+
+# 评估指标 
+evaluate
+absl-py
+rouge_score
+sacrebleu
+scipy
+pandas
+numpy

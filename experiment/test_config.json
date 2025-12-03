@@ -1,0 +1,30 @@
+{
+  "pipeline": {
+    "run_prediction": true,
+    "run_evaluation": true
+  },
+  "data": {
+    "input_path": "example_data/geography_5_csv_files_08051006_corpus_seeds.json",
+    "output_path": "output/test_result.json"
+  },
+  "prediction": {
+    "api_key": "sk-xxxxxx",
+    "base_url": "https://dashscope...",
+    "model": "qwen-plus",
+    "schema_path": "E:/accuracy/data/synthesis_schema_data_corpus/Sorted_corpus_0911/geography_5_csv_files_08051006/import_config.json",
+    "max_workers": 5,
+    "level_fields": [
+      ["initial_nl", "initial_query"],
+      ["level_1", "level_1_query"],
+      ["level_2", "level_2_query"],
+      ["level_3", "level_3_query"],
+      ["level_4", "level_4_query"]
+    ]
+  },
+  "evaluation": {
+    "db_uri": "bolt://localhost:7687",
+    "db_user": "admin",
+    "db_pass": "73@TuGraph",
+    "dbgpt_root": "tools/dbgpt-hub-gql"
+  }
+}
